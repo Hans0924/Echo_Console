@@ -1,30 +1,30 @@
 ﻿namespace Echo_Console.Protocol
 {
-    public class RequestWeather : IProtocalSerializable
+    public class WeatherRequest : IProtocalSerializable
     {
         protected string Command;
 
-        public string Callsign { get; set; }
+        public string Source { get; set; }
 
         public string Destination { get; set; }
 
         public string Airport { get; set; }
 
-        public RequestWeather()
+        public WeatherRequest()
         {
             Command = "#WX";
         }
 
-        public RequestWeather(string callsign, string destination, string airport) : this()
+        public WeatherRequest(string source, string destination, string airport) : this()
         {
-            Callsign = callsign;
+            Source = source;
             Destination = destination;
             Airport = airport;
         }
 
         public string Serialize()
         {
-            return Command + Callsign + ":" + Destination + ":" + Airport;
+            return Command + Source + ":" + Destination + ":" + Airport;
         }
     }
 }

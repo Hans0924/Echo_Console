@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -42,25 +42,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Net\EchoSocket.cs" />
     <Compile Include="Net\EchoTcpClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protocol\AtcPositionReport.cs" />
-    <Compile Include="Protocol\DisconnectFromServer.cs" />
+    <Compile Include="Protocol\AcarsQuery.cs" />
+    <Compile Include="Protocol\AcarsResponse.cs" />
+    <Compile Include="Protocol\AddAtc.cs" />
+    <Compile Include="Protocol\AtcPosition.cs" />
+    <Compile Include="Protocol\ClientQuery.cs" />
+    <Compile Include="Protocol\ClientResponse.cs" />
+    <Compile Include="Protocol\DeleteAtc.cs" />
+    <Compile Include="Protocol\DeletePilot.cs" />
+    <Compile Include="Protocol\ErrorResponse.cs" />
     <Compile Include="Protocol\IProtocalSerializable.cs" />
     <Compile Include="Protocol\KillFromServer.cs" />
-    <Compile Include="Protocol\PilotConnectRequest.cs" />
-    <Compile Include="Protocol\PilotPositionReport.cs" />
-    <Compile Include="Protocol\SendPing.cs" />
-    <Compile Include="Protocol\RequestWeather.cs" />
-    <Compile Include="Protocol\SendFlightPlan.cs" />
-    <Compile Include="Protocol\SendTextMessage.cs" />
+    <Compile Include="Protocol\AddPilot.cs" />
+    <Compile Include="Protocol\IdentifyVatsim.cs" />
+    <Compile Include="Protocol\PilotPosition.cs" />
+    <Compile Include="Protocol\Ping.cs" />
+    <Compile Include="Protocol\Pong.cs" />
+    <Compile Include="Protocol\WeatherRequest.cs" />
+    <Compile Include="Protocol\FlightPlan.cs" />
+    <Compile Include="Protocol\SquawkBox.cs" />
+    <Compile Include="Protocol\TextMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Todo.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 
 namespace Echo_Console.Protocol
 {
-    public class PilotConnectRequest : IProtocalSerializable
+    public class AddPilot : IProtocalSerializable
     {
         protected string Command;
 
@@ -22,12 +23,12 @@ namespace Echo_Console.Protocol
 
         public string Remarks { get; set; }
 
-        public PilotConnectRequest()
+        public AddPilot()
         {
             Command = "#AP";
         }
 
-        public PilotConnectRequest(string callsign, string destination, string cid, 
+        public AddPilot(string callsign, string destination, string cid, 
             string password, string requestLevel, string protocolRevision, 
             string simType, string remarks) : this()
         {
@@ -39,6 +40,20 @@ namespace Echo_Console.Protocol
             ProtocolRevision = protocolRevision;
             SimType = simType;
             Remarks = remarks;
+        }
+
+        public AddPilot(string packet) : this()
+        {
+            var props = packet.Split(':').ToList();
+            if (props.Count < 7)
+                throw new ArgumentException();
+            Callsign = props[0].Replace(Command, "");
+            Destination = props[1];
+            Cid = props[2];
+            Password = props[3];
+            RequestLevel = props[4];
+            ProtocolRevision = props[5];
+            SimType = props[6];
         }
 
         public string Serialize()

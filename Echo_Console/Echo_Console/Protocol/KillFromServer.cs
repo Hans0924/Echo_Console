@@ -1,9 +1,12 @@
-﻿namespace Echo_Console.Protocol
+﻿using System;
+using System.Linq;
+
+namespace Echo_Console.Protocol
 {
     public class KillFromServer : IProtocalSerializable
     {
         protected string Command;
-        public string Callsign { get; set; }
+        public string Source { get; set; }
         public string Target { get; set; }
         public string Reason { get; set; }
 
@@ -12,16 +15,26 @@
             Command = "$!!";
         }
 
-        public KillFromServer(string callsign, string target, string reason) : this()
+        public KillFromServer(string source, string target, string reason) : this()
         {
-            Callsign = callsign;
+            Source = source;
             Target = target;
             Reason = reason;
         }
 
+        public KillFromServer(string packet) : this()
+        {
+            var props = packet.Split(':').ToList();
+            if (props.Count < 3)
+                throw new ArgumentException();
+            Source = props[0].Replace(Command, "");
+            Target = props[1];
+            Reason = props[2];
+        }
+
         public string Serialize()
         {
-            return Command + Callsign + ":" + Target + ":" + Reason;
+            return Command + Source + ":" + Target + ":" + Reason;
         }
     }
 }
